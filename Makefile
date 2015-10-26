@@ -42,6 +42,8 @@ jit0-x64: tests/jit0-x64.c
 jit-x64: dynasm-driver.c jit-x64.h
 	$(CC) $(CFLAGS) -o $@ -DJIT=\"jit-x64.h\" \
 		dynasm-driver.c
+#jit-x64.h: jit-x64_opt.dasc
+#	        $(LUA) dynasm/dynasm.lua -o $@ jit-x64_opt.dasc
 jit-x64.h: jit-x64.dasc
 	        $(LUA) dynasm/dynasm.lua -o $@ jit-x64.dasc
 run-jit-x64: jit-x64
@@ -73,6 +75,17 @@ test: test_stack jit0-x64 jit0-arm
 
 test_stack: tests/test_stack.c
 	$(CC) $(CFLAGS) -o $@ $^
+
+token: awib hanoi mandelbrot sierpinski
+
+awib: progs/awib.b
+	./strtok $^
+hanoi: progs/hanoi.b
+	./strtok $^
+mandelbrot: progs/mandelbrot.b
+	./strtok $^
+sierpinski: progs/sierpinski.b
+	./strtok $^
 
 clean:
 	$(RM) $(BIN) \
