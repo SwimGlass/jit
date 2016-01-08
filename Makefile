@@ -8,7 +8,7 @@ LUA = lua
 
 all: $(BIN)
 
-CFLAGS = -Wall -Werror -std=gnu99 -I.
+CFLAGS = -Wall -Werror -std=gnu99 -I. -g
 
 interpreter: interpreter.c
 	$(CC) $(CFLAGS) -o $@ $^

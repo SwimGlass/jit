@@ -16,6 +16,10 @@ int main(int argc,char *argv[])
 {
     int flag = 0,loop=0;
     FILE *fp = fopen(argv[1],"r");
+    if(fp == NULL) {
+        printf("Cannot open file '%s' : %s\n", argv[1], strerror(errno));
+        return;
+    } 
     int c,i,num=0;
     Token_list *t;
     Token_list *head = (Token_list *)malloc(sizeof(Token_list));
